@@ -3,8 +3,6 @@
 #include <vector>
 #include <cstdio>
 
-#include <cassert>
-
 using namespace std;
 
 #define SIZE 7
@@ -126,15 +124,15 @@ int to_dir(vector<int> board, int from, char dir) {
             to = from-2;
             break;
         case 'R':
-            condition_for_invalid = from%SIZE > 5 || board.at(from+1) != 1 || board.at(from+2) != 0 || board.at(from+1) != 1;
+            condition_for_invalid = from%SIZE > 4 || board.at(from+1) != 1 || board.at(from+2) != 0 || board.at(from+1) != 1;
             to = from+2;
             break;
         case 'U':
-            condition_for_invalid = (int)from/SIZE < 2 || board.at(from-SIZE) != 1 || board.at(from-2*SIZE) != 0 || board.at(from-SIZE) != 1;
+            condition_for_invalid = (int)from/SIZE < 2 || board.at(from-SIZE) != 1 || board.at(from-2*SIZE) != 0;
             to = from-2*SIZE;
             break;
         case 'D':
-            condition_for_invalid = (int)from/SIZE > 5 || board.at(from+SIZE) != 1 || board.at(from+2*SIZE) != 0 || board.at(from+SIZE) != 1;
+            condition_for_invalid = (int)from/SIZE > 4 || board.at(from+SIZE) != 1 || board.at(from+2*SIZE) != 0;
             to = from+2*SIZE;
             break;
     }
@@ -170,14 +168,17 @@ bool search(Board board, vector<Move>& moves) {
         int num_of_pieces = number_of_pieces(board);
         if (num_of_pieces == 1 && board.at((int)((SIZE*SIZE)/2)) == 1)
             return true;
+
+        if (num_of_pieces == 1)
+            return false;
         
-        // if is neither losing nor winning, try for every possible_moves of i
         for (auto mv: possible_moves(board, i)) {
             moves.push_back(mv);
-            if (search(make_move(board, mv), moves))
+            if (search(make_move(board, mv), moves)) {
                 return true;
-            else
+            } else {
                 moves.pop_back();
+            }
         }
     }
 
@@ -191,6 +192,9 @@ int main() {
 
     for (auto mv: moves)
         cout << mv.to_string() << endl;
+
+    if (!moves.size())
+        cout << "Loser" << endl;
 
     return 0;
 }
