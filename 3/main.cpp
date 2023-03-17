@@ -1,4 +1,6 @@
+#include <cstdlib>
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -30,7 +32,6 @@ struct Time {
             else 
                 h_s.push_back(c);
         }
-
         hour = stoi(h_s);
         minute = stoi(m_s);
     }
@@ -48,16 +49,12 @@ struct Course {
     string name;
     vector<int> present_days;
     Duration present_time_range;
-
-    Course() {}
 };
 
 struct Teacher {
     string name;
     vector<int> free_days;
     vector<string> subjects;
-
-    Teacher() {}
 };
 
 struct ClassTime {
@@ -69,7 +66,6 @@ struct ClassTime {
 };
 
 typedef vector<ClassTime> Plan;
-typedef pair<Teacher, Course> TeacherCourse;
 
 const vector<Duration> SESSIONS{ 
     make_pair(Time("7:30"), Time("9:00")), 
@@ -117,7 +113,6 @@ void input_teachers(vector<Teacher>& teachers) {
     while (num_of_teachers--) {
         string name;
         cin >> name;
-
         int num_of_free_days;
         cin >> num_of_free_days;
         vector<int> free_days;
@@ -133,11 +128,7 @@ void input_teachers(vector<Teacher>& teachers) {
             subjects.push_back(subject);
         }
 
-        Teacher teacher;
-        teacher.name = name;
-        teacher.free_days = free_days;
-        teacher.subjects = subjects;
-        teachers.push_back(teacher);
+        teachers.push_back({ name, free_days, subjects });
     }
 }
 
@@ -155,11 +146,7 @@ void input_courses(vector<Course>& courses) {
         Time start_time = input_time();
         Time end_time = input_time();
 
-        Course course;
-        course.name = name;
-        course.present_days = present_days;
-        course.present_time_range = make_pair(start_time, end_time);
-        courses.push_back(course);
+        courses.push_back({ name, present_days, make_pair(start_time, end_time) });
     }
 }
 
@@ -180,12 +167,10 @@ void output_row(Plan plan, Course course, Classroom classroom) {
 
 void output_plan(Plan plan, vector<Course> courses) {
     sort(courses.begin(), courses.end(), [](const Course c1, Course c2){ return c1.name < c2.name; });
-    
     for (Course course : courses) {
         cout << course.name << endl;
-        for (Classroom c=0; c<NUM_OF_CLASSES; c++) {
+        for (Classroom c=0; c<NUM_OF_CLASSES; c++)
             output_row(plan, course, c);
-        }
     }
 }
 
