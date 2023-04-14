@@ -1,3 +1,5 @@
+// Rasti yadam raft begam, [pishapish] eydet mobarak!
+
 #include <iostream>
 #include <vector>
 #include <string>
