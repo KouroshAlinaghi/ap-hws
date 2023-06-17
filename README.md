@@ -1,4 +1,5 @@
-# The repository holds all my advanced programming course homeworks.
+# AP-HWS
+The repository holds all my advanced programming course homeworks.
 
 ## The list of projects:
 
@@ -10,4 +11,4 @@
 * A5: THE BEST PROJECT OF THE COURSE. brand-new-turtix is an ordinary imitation of a 2D platform game.
 * A6: stupid clone of snap, again, CLI.
 * A7: Just another failed imitation of FPL (Fantasy Premier League).
-* ABonuso (A3.5): Refactoring a terrible source code.
+* ABonus (A3.5): Refactoring a terrible source code.
