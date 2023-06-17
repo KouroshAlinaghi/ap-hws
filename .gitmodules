@@ -1,0 +1,15 @@
+[submodule "ABonus-810101476"]
+	path = ABonus-810101476
+	url = https://github.com/KouroshAlinaghi/ABonus-810101476
+[submodule "APS02-A4"]
+	path = APS02-A4
+	url = https://github.com/KouroshAlinaghi/APS02-A4
+[submodule "APS02-A6"]
+	path = APS02-A6
+	url = https://github.com/KouroshAlinaghi/APS02-A6
+[submodule "APS02-A7"]
+	path = APS02-A7
+	url = https://github.com/KouroshAlinaghi/APS02-A7
+[submodule "brand-new-turtix"]
+	path = brand-new-turtix
+	url = https://github.com/KouroshAlinaghi/brand-new-turtix
